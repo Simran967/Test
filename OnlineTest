@@ -1,0 +1,73 @@
+1. Answer for 1st
+import random
+
+def find_prob(prb):
+	total_prob = 0
+	for i,j in prb:
+	    # Generate random outcome number from 1 to 1000
+	    r = random.randint(1, 1000)
+	    total_prob += (r)
+
+	print(total_prob)
+
+
+prb =  [ {1, 10}, {2, 30}, {3, 15}, {4, 15}, {5, 30}, {6, 0} ]
+find_prob(prb)
+
+2. Answer for 2nd
+# check for operand
+def isOperand(c):
+	return (c >= '0' and c <= '9');
+
+# function to find value
+def value(c):
+	return ord(c) - ord('0');
+
+# This function evaluates expressions. It returns -1 if the given expression is invalid.
+def evaluate(exp):
+	len1 = len(exp);
+	# Base Case: Given expression is empty
+	if (len1 == 0):
+		return -1;
+
+	# first character value
+	res = value(exp[0]);
+
+	for i in range(1,len1,2):
+		operator = exp[i];
+		operand = exp[i + 1];
+
+		# If next to next character is not an operand return -1
+		if (isOperand(operand)==False):
+			return -1;
+
+		# Update result as per operator
+		if (operator == '+'):
+			res += value(operand);
+		elif (operator == '-'):
+			res -= int(value(operand));
+		elif (operator == '*'):
+			res *= int(value(operand));
+		elif (operator == '/'):
+			res /= int(value(operand));
+
+		# If not a valid operator
+		else:
+			return -1;
+	
+	return res;
+
+# Driver Code
+expr1 = "1+2*5+3";
+res = evaluate(expr1);
+print(expr1,"is Invalid") if (res == -1) else print("Value of",expr1,"is",res);
+
+expr2 = "1+2*3";
+res = evaluate(expr2);
+print(expr2,"is Invalid") if (res == -1) else print("Value of",expr2,"is",res);
+
+expr3 = "1++2";
+res = evaluate(expr3);
+print(expr3,"is Invalid") if (res == -1) else print("Value of",expr3,"is",res);
+
+
